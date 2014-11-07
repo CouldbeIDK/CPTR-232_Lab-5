@@ -15,6 +15,25 @@
 
 // define your push/pop, enqueue/dequeue, or insert/delete 
 // 	and an appropriate print_datastructure function here
+
+int next[100];
+int prev[100];
+int value[100];
+int first;
+int free;
+
+void init{
+	int i;
+	for(i=0;i<100;i++){
+		next[i] = (i + 1) % 100;
+		if (i == 0){
+			prev[i] = 99;
+		}else{
+			prev[i] = i - 1;
+		}
+	}
+}
+
 void push(int val)
 {
 	printf("push ");
@@ -33,7 +52,7 @@ void print_datastructure()
 
 
 // Leave this alone:
-#include "datastruct.h"
+#include "datastructLinked.h"
 int main()
 {
 	parse_exec();
