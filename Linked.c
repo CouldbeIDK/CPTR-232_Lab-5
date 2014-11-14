@@ -18,7 +18,9 @@
 
 int next[10];
 int prev[10];
-int value[10];S
+int value[10] = {0};
+int unused;
+int head;
 
 void init(){
 	int i;
@@ -30,21 +32,54 @@ void init(){
 			prev[i] = i - 1;
 		}
 	}
+	unused = 1;
+	head = 1;
 }
 
 void insert(int val, int loc)
 {
-	value[next[loc]] = val;
-	prev[next[loc]] = loc;
+	int nn = unused;
+	unused = next[unused];
+	next[nn] = next[loc];
+	prev[nn] = loc;
+	if(next[loc] != -1){
+		prev[next[loc]] = nn;
+	}
+	next[loc] = nn;
+	value[nn] = val;
 }
 
 int delete(int loc)
 {
-	next[prev[loc]] = next[loc];
+	if(loc == head){
+		head = next[loc];
+	}else{
+		next[prev[loc]] = next[loc];
+	}
+	if(next[loc] != -1){
+		prev[next[loc]] = prev[loc];
+	}
+	next[loc] = unused;
+	unused = loc;
 }
+
 void print_datastructure()
 {
-	printf("Printing...\n");
+	int i;
+	for(i=0;i<10;i++){
+		printf("| %d ", prev[i]);
+	}
+	printf("|\n");
+	for(i=0;i<10;i++){
+		printf("| %d ", value[i]);
+	}
+	printf("|\n");
+	for(i=0;i<10;i++){
+		printf("| %d ", next[i]);
+	}
+	printf("|\n");
+	printf("Head: %d\n", head);
+	printf("Free: %d\n", unused);
 }
 // end definitions
 
