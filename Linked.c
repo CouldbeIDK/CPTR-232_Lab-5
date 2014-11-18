@@ -33,7 +33,9 @@ void init(){
 		}
 	}
 	unused = 1;
-	head = 1;
+	head = 0;
+	next[head] = -1;
+	prev[head] = -1;
 }
 
 void insert(int val, int loc)
@@ -66,14 +68,19 @@ int delete(int loc)
 void print_datastructure()
 {
 	int i;
+	printf("index");
+	for(i=0;i<10;i++){
+		printf("| %d ", i);
+	}
+	printf("\n prev");
 	for(i=0;i<10;i++){
 		printf("| %d ", prev[i]);
 	}
-	printf("|\n");
+	printf("|\n valu");
 	for(i=0;i<10;i++){
 		printf("| %d ", value[i]);
 	}
-	printf("|\n");
+	printf("|\n next");
 	for(i=0;i<10;i++){
 		printf("| %d ", next[i]);
 	}
